@@ -21,7 +21,7 @@ Install Spatie's Media Library (version 9.1.0 or later) in your project. This wi
 These parameters are optional - you can leave them out if you're happy with the defaults.
 
 ## Thumbnail colours
-The waveform is drawn in the foreground colour, over the background colour. Both should be specified using standard HTML 6-digit hex values passed through the media library config, as above.
+The waveform is drawn in the foreground colour, over the background colour. Both should be specified using standard HTML 6-digit hex values (with a leading `#`) passed through the media library config, as above.
 
 ## Thumbnail sizing
 The base size of the thumbnails can be set via the media library config, as shown above. The default is 2048 x 2048 pixels, neutral values chosen because audio files have no inherent size or aspect ratio. This is quite large, but since the images are very simple, they will compress very well in PNG format.
