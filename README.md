@@ -1,6 +1,10 @@
 # Audio File Thumbnail Generator for Spatie's Laravel Media Library
 
-This audio image generator generates thumbnails for audio files uploaded through Spatie's Media Library, just as it already does for image, video, and PDF formats.
+This audio image generator generates thumbnails for audio files uploaded through [Spatie's Media Library](https://github.com/spatie/laravel-medialibrary), just as it already does for image, video, and PDF formats. By default they look like this:
+
+![Example waveform image](https://github.com/Synchro/laravel-medialibrary-audio/blob/main/tests/testfiles/example_waveform.png)
+
+Spatie's docs have more details of [how plugins integrate with Media Library](https://spatie.be/docs/laravel-medialibrary/v9/converting-other-file-types/creating-a-custom-image-generator).
 Thumbnails of a mono waveform of the whole audio file are generated using ffmpeg's `waveform` converter. It uses the same [PHP FFMpeg package](https://packagist.org/packages/php-ffmpeg/php-ffmpeg) that is used for the video formats already supported by Media Library, so there are no additional dependencies.
 
 ## Installation & configuration
