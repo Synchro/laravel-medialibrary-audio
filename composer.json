@@ -1,0 +1,51 @@
+{
+  "name": "synchro/laravel-medialibrary-audio",
+  "description": "Audio file thumbnail generator for Spatie's Laravel Media Library",
+  "authors": [
+    {
+      "name": "Marcus Bointon",
+      "email": "marcus@synchromedia.co.uk"
+    }
+  ],
+  "keywords": [
+    "laravel-medialibrary",
+    "media",
+    "conversion",
+    "audio",
+    "laravel"
+  ],
+  "homepage": "https://github.com/spatie/laravel-medialibrary",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "require": {
+    "php": "^7.4|^8.0",
+    "spatie/laravel-medialibrary": "^9.1.0"
+  },
+  "require-dev": {
+    "pestphp/pest": "^v0.3.10",
+    "php-ffmpeg/php-ffmpeg": "^0.16.0",
+    "laravel/framework": "^8.0",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+    "phpcompatibility/php-compatibility": "^9.3.5",
+    "phpstan/phpstan": "^0.12.50",
+    "squizlabs/php_codesniffer": "^3.5.8",
+    "vimeo/psalm": "^4.0.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Synchro\\MediaLibrary\\Conversions\\ImageGenerators\\": "src"
+    }
+  },
+  "scripts": {
+    "test:cs": "./vendor/bin/phpcs",
+    "test:unit": "./vendor/bin/pest --coverage --colors=always",
+    "test:types": "./vendor/bin/phpstan analyse --ansi --no-progress --memory-limit=0",
+    "test:psalm": "./vendor/bin/psalm --show-info=true",
+    "test": [
+      "@test:cs",
+      "@test:unit",
+      "@test:types",
+      "@test:psalm"
+    ]
+  }
+}

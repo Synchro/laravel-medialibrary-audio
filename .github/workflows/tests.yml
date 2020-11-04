@@ -1,0 +1,72 @@
+name: Tests
+
+on: ['push', 'pull_request']
+
+jobs:
+  coding-standards:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+        php: [7.4]
+        dependency-version: [prefer-stable]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          tools: composer:v2
+
+      - name: Install dependencies
+        run: composer update --${{ matrix.dependency-version }} --no-interaction --no-progress
+
+      - name: Check coding standards
+        run: vendor/bin/phpcs
+
+  tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        php: [7.3, 7.4, 8.0]
+        dependency-version: [prefer-lowest, prefer-stable]
+
+    name: Tests P${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency-version }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:v2
+          coverage: pcov
+
+      - name: Install PHP 7 dependencies
+        run: composer update --${{ matrix.dependency-version }} --no-interaction --no-progress
+        if: "matrix.php < 8"
+
+      - name: Install PHP 8 dependencies
+        run: composer update --${{ matrix.dependency-version }} --ignore-platform-req=php --no-interaction --no-progress
+        if: "matrix.php >= 8"
+
+      - name: Pest Unit Tests
+        run: vendor/bin/pest --colors=always
+
+      - name: PHPStan Type Checks
+        run: vendor/bin/phpstan analyse --ansi --no-progress --memory-limit=0
+
+      - name: Psalm Type Tests
+        run: vendor/bin/psalm --shepherd --show-info=true -c psalm.xml
