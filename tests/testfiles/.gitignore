@@ -1,0 +1,9 @@
+*
+!.gitignore
+!test_aiff.aiff
+!test_flac.flac
+!test_m4a.m4a
+!test_mp3.mp3
+!test_ogg.ogg
+!test_wav.wav
+!test_wma.wma

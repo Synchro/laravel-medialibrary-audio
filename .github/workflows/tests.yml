@@ -4,11 +4,10 @@ on: ['push', 'pull_request']
 
 jobs:
   coding-standards:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest]
         php: [7.4]
         dependency-version: [prefer-stable]
     steps:
@@ -18,6 +17,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
+          php-version: ${{ matrix.php }}
           tools: composer:v2
 
       - name: Install dependencies
@@ -27,17 +27,22 @@ jobs:
         run: vendor/bin/phpcs
 
   tests:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        php: [7.3, 7.4, 8.0]
+        php: [8.0, 7.4]
         dependency-version: [prefer-lowest, prefer-stable]
 
-    name: Tests P${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency-version }}
+    name: Tests P${{ matrix.php }} - ${{ matrix.dependency-version }}
 
     steps:
+      - name: Update apt
+        run: sudo apt-get update --fix-missing
+
+      - name: Install ffmpeg
+        run: sudo apt-get install ffmpeg
+
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -51,6 +56,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
           tools: composer:v2
           coverage: pcov
 
@@ -63,7 +69,7 @@ jobs:
         if: "matrix.php >= 8"
 
       - name: Pest Unit Tests
-        run: vendor/bin/pest --colors=always
+        run: vendor/bin/phpunit --colors=always
 
       - name: PHPStan Type Checks
         run: vendor/bin/phpstan analyse --ansi --no-progress --memory-limit=0
