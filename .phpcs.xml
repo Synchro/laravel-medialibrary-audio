@@ -4,7 +4,7 @@
 
   <config name="testVersion" value="7.4-"/>
 
-  <arg name="basepath" value="."/>
+  <arg name="basepath" value="./src"/>
   <arg name="cache" value=".phpcs-cache"/>
   <arg name="colors"/>
   <arg name="extensions" value="php"/>
