@@ -39,4 +39,9 @@ This size doesn't directly affect the thumbnails delivered to clients because me
 * `wma`
 
 ## Running tests
-Tests are written in pest, so to run the test suite, install dev dependencies (`composer install --dev`) and then run `./vendor/bin/pest`. There are also configurations for phpcs, psalm, and phpstan to check code style and type coverage, or run all of them using `composer test`.
+
+If your local ffmpeg installation is in a different path you can use the environment variables to define your own path.
+
+```bash
+FFMPEG_PATH=/usr/local/bin/ffmpeg FFPROBE_PATH=/usr/local/bin/ffprobe vendor/bin/phpunit
+```

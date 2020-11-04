@@ -38,6 +38,12 @@ jobs:
     name: Tests P${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency-version }}
 
     steps:
+      - name: Update apt
+        run: sudo apt-get update --fix-missing
+
+      - name: Install ffmpeg
+        run: sudo apt-get install ffmpeg
+
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -63,7 +69,7 @@ jobs:
         if: "matrix.php >= 8"
 
       - name: Pest Unit Tests
-        run: vendor/bin/pest --colors=always
+        run: vendor/bin/phpunit --colors=always
 
       - name: PHPStan Type Checks
         run: vendor/bin/phpstan analyse --ansi --no-progress --memory-limit=0
