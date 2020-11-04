@@ -54,8 +54,12 @@ class AudioWaveform extends ImageGenerator
         $waveform->save($imageFile);
 
         //Read the file back in again so we can fill in the background colour
+        //Yes, this is inefficient, but it doesn't look like FFMpeg lets us get our hands on the image data directly
         $image = ImageFactory::load($imageFile);
-        //This function wants a hex colour without a # prefix, will also work with HTML named colours like 'pink'
+        //Fill in the background colour.
+        //@TODO This method is not ideal; because it doesn't overlay the background correctly,
+        //resulting in fringing around the waveform. PRs welcomed to fix this!
+        //This function wants a hex colour without a # prefix
         $image->background(str_replace('#', '', $this->background));
         $image->optimize();
         $image->save($imageFile);
