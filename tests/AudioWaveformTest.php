@@ -2,13 +2,10 @@
 
 namespace Synchro\MediaLibrary\Conversions\ImageGenerators\Tests;
 
-use Spatie\Snapshots\MatchesSnapshots;
 use Synchro\MediaLibrary\Conversions\ImageGenerators\AudioWaveform;
 
 class AudioWaveformTest extends TestCase
 {
-    use MatchesSnapshots;
-
     protected function tearDown(): void
     {
         foreach (glob(__DIR__ . '/testfiles/*.png') as $image) {
@@ -31,7 +28,10 @@ class AudioWaveformTest extends TestCase
 
         $this->assertStringEndsWith('.png', $imageFilePath);
 
-        $this->assertMatchesFileSnapshot($imageFilePath);
+        $info = getimagesize($imageFilePath);
+        $this->assertSame(2048, $info[0]);
+        $this->assertSame(2048, $info[1]);
+        $this->assertSame('image/png', $info['mime']);
     }
 
     /** @test */
@@ -45,7 +45,10 @@ class AudioWaveformTest extends TestCase
 
         $this->assertStringEndsWith('.png', $imageFilePath);
 
-        $this->assertMatchesFileSnapshot($imageFilePath);
+        $info = getimagesize($imageFilePath);
+        $this->assertSame(2048, $info[0]);
+        $this->assertSame(2048, $info[1]);
+        $this->assertSame('image/png', $info['mime']);
     }
 
     /** @test */
@@ -59,7 +62,10 @@ class AudioWaveformTest extends TestCase
 
         $this->assertStringEndsWith('.png', $imageFilePath);
 
-        $this->assertMatchesFileSnapshot($imageFilePath);
+        $info = getimagesize($imageFilePath);
+        $this->assertSame(2048, $info[0]);
+        $this->assertSame(512, $info[1]);
+        $this->assertSame('image/png', $info['mime']);
     }
 
     public function audioFiles(): array
