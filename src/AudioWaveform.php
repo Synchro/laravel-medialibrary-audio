@@ -98,6 +98,7 @@ class AudioWaveform extends ImageGenerator
                 'audio/aac',
                 'audio/flac',
                 'audio/mp4',
+                'audio/mpeg',
                 'audio/mpeg3',
                 'audio/ogg',
                 'audio/vnd.wav',
