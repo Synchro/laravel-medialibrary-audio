@@ -8,7 +8,11 @@ Spatie's docs have more details of [how plugins integrate with Media Library](ht
 Thumbnails of a mono waveform of the whole audio file are generated using ffmpeg's `waveform` converter. It uses the same [PHP FFMpeg package](https://packagist.org/packages/php-ffmpeg/php-ffmpeg) that is used for the video formats already supported by Media Library, so there are no additional dependencies.
 
 ## Installation & configuration
-Install Spatie's Media Library (version 9.1.0 or later) in your project. This will generate a config file in `config/media-library.php`. Add the audio waveform generator to the list of generators in the `image_generators` section, including optionally setting default `width`, `height`, `foreground` and `background` properties (default values shown):
+Install using composer with:
+
+    composer require synchro/laravel-medialibrary-audio 
+
+Installing Spatie's Media Library (version 9.1.0 or later) in your Laravel project will generate a config file in `config/media-library.php`. Add the audio waveform generator to the list of generators in the `image_generators` section, including optionally setting default `width`, `height`, `foreground` and `background` properties (default values shown):
 
 ```php
 'image_generators' => [
