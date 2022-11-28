@@ -67,7 +67,7 @@ jobs:
         run: vendor/bin/phpunit --colors=always
 
       - name: PHPStan Type Checks
-        run: vendor/bin/phpstan analyse --ansi --no-progress --memory-limit=0
+        run: vendor/bin/phpstan analyse --ansi --no-progress
 
       - name: Psalm Type Tests
         run: vendor/bin/psalm --shepherd --show-info=true -c psalm.xml
