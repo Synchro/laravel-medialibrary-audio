@@ -12,7 +12,7 @@ jobs:
         dependency-version: [prefer-stable]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
@@ -44,10 +44,10 @@ jobs:
         run: sudo apt-get install ffmpeg
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cache dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         with:
           path: ~/.composer/cache/files
           key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
@@ -63,7 +63,7 @@ jobs:
       - name: Install PHP dependencies
         run: composer update --${{ matrix.dependency-version }} --no-interaction --no-progress
 
-      - name: Pest Unit Tests
+      - name: Run Tests
         run: vendor/bin/phpunit --colors=always
 
       - name: PHPStan Type Checks
