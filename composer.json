@@ -55,5 +55,10 @@
       "@test:types",
       "@test:psalm"
     ]
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   }
 }
