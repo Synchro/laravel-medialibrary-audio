@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [7.4]
+        php: [8.0]
         dependency-version: [prefer-stable]
     steps:
       - name: Checkout
@@ -31,7 +31,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [8.0, 7.4]
+        php: [8.0, 8.1, 8.2]
         dependency-version: [prefer-lowest, prefer-stable]
 
     name: Tests P${{ matrix.php }} - ${{ matrix.dependency-version }}
@@ -60,13 +60,8 @@ jobs:
           tools: composer:v2
           coverage: pcov
 
-      - name: Install PHP 7 dependencies
+      - name: Install PHP dependencies
         run: composer update --${{ matrix.dependency-version }} --no-interaction --no-progress
-        if: "matrix.php < 8"
-
-      - name: Install PHP 8 dependencies
-        run: composer update --${{ matrix.dependency-version }} --ignore-platform-req=php --no-interaction --no-progress
-        if: "matrix.php >= 8"
 
       - name: Pest Unit Tests
         run: vendor/bin/phpunit --colors=always
