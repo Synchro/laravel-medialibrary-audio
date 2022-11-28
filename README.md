@@ -48,8 +48,13 @@ This size doesn't directly affect the thumbnails delivered to clients because me
 
 ## Running tests
 
-If your local ffmpeg installation is in a different path you can use the environment variables to define your own path.
+If your local ffmpeg installation is in a different path you can use the environment variables to define your own path:
 
 ```bash
 FFMPEG_PATH=/usr/local/bin/ffmpeg FFPROBE_PATH=/usr/local/bin/ffprobe vendor/bin/phpunit
+```
+Or on recent macOS with homebrew:
+
+```bash
+FFMPEG_PATH=/opt/homebrew/bin/ffmpeg FFPROBE_PATH=/opt/homebrew/bin/ffprobe vendor/bin/phpunit
 ```
