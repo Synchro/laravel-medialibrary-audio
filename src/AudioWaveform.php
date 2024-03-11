@@ -10,26 +10,26 @@ use Spatie\MediaLibrary\Support\ImageFactory;
 
 class AudioWaveform extends ImageGenerator
 {
-    private int $width = 2048;
-    private int $height = 2048;
-    private string $foreground = '#113554';
-    private string $background = '#CBE2F4';
+    private int $width;
+    private int $height;
+    private string $foreground;
+    private string $background;
 
-    public function __construct(array $args = [])
+    public function __construct(int $width = 2048, int $height = 2048, string $foreground = '#113554', string $background = '#CBE2F4')
     {
         //Validate width and height
-        if (array_key_exists('width', $args) && (int)$args['width'] > 0 && (int)$args['width'] <= 8192) {
-            $this->width = (int)$args['width'];
+        if ($width > 0 && $width <= 8192) {
+            $this->width = $width;
         }
-        if (array_key_exists('height', $args) && (int)$args['height'] > 0 && (int)$args['height'] <= 8192) {
-            $this->height = (int)$args['height'];
+        if ($height > 0 && $height <= 8192) {
+            $this->height = $height;
         }
-        //Validate colours
-        if (array_key_exists('foreground', $args) && preg_match('/^#[A-Fa-f0-9]{6}$/', (string)$args['foreground'])) {
-            $this->foreground = (string)$args['foreground'];
+        //Validate colors
+        if (preg_match('/^#[A-Fa-f0-9]{6}$/', $foreground)) {
+            $this->foreground = $foreground;
         }
-        if (array_key_exists('background', $args) && preg_match('/^#[A-Fa-f0-9]{6}$/', (string)$args['background'])) {
-            $this->background = (string)$args['background'];
+        if (preg_match('/^#[A-Fa-f0-9]{6}$/', $background)) {
+            $this->background = $background;
         }
     }
 
