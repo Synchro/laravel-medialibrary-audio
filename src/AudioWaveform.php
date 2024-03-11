@@ -15,7 +15,12 @@ class AudioWaveform extends ImageGenerator
     private string $foreground;
     private string $background;
 
-    public function __construct(int $width = 2048, int $height = 2048, string $foreground = '#113554', string $background = '#CBE2F4')
+    public function __construct(
+        int    $width = 2048,
+        int    $height = 2048,
+        string $foreground = '#113554',
+        string $background = '#CBE2F4'
+    )
     {
         //Validate width and height
         if ($width > 0 && $width <= 8192) {
