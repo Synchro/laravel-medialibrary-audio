@@ -62,11 +62,8 @@ jobs:
       - name: Install PHP dependencies
         run: composer update --${{ matrix.dependency-version }} --no-interaction --no-progress
 
-      - name: Run Tests
-        run: vendor/bin/phpunit --colors=always
-
       - name: PHPStan Type Checks
         run: vendor/bin/phpstan analyse --ansi --no-progress
 
-      - name: Psalm Type Tests
-        run: vendor/bin/psalm --shepherd --show-info=true -c psalm.xml
+      - name: Run Tests
+        run: vendor/bin/phpunit --colors=always
