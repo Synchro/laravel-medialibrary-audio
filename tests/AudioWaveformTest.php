@@ -23,6 +23,7 @@ class AudioWaveformTest extends TestCase
      */
     public function itConvertsAudioFile(string $audioFilePath): void
     {
+        config(['media-library.temporary_directory_path' => sys_get_temp_dir()]);
         $generator = new AudioWaveform();
         $imageFilePath = $generator->convert($audioFilePath);
 
@@ -37,6 +38,7 @@ class AudioWaveformTest extends TestCase
     /** @test */
     public function itConvertsAudioFileWithCustomColors(): void
     {
+        config(['media-library.temporary_directory_path' => sys_get_temp_dir()]);
         $generator = new AudioWaveform(
             foreground: '#ffffff',
             background: '#000000'
@@ -55,6 +57,7 @@ class AudioWaveformTest extends TestCase
     /** @test */
     public function itConvertsAudioFileWithCustomDimensions(): void
     {
+        config(['media-library.temporary_directory_path' => sys_get_temp_dir()]);
         $generator = new AudioWaveform(
             width:  2048,
             height: 512
