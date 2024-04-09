@@ -16,8 +16,8 @@ class AudioWaveform extends ImageGenerator
     private string $background;
 
     public function __construct(
-        int $width = 2048,
-        int $height = 2048,
+        int    $width = 2048,
+        int    $height = 2048,
         string $foreground = '#113554',
         string $background = '#CBE2F4'
     ) {
@@ -63,11 +63,11 @@ class AudioWaveform extends ImageGenerator
         );
         $waveform->save($imageFile);
 
-        //Read the file back in again so we can fill in the background colour
+        //Read the file back in again to get the background colour
         //Yes, this is inefficient, but it doesn't look like FFMpeg lets us get our hands on the image data directly
         $image = ImageFactory::load($imageFile);
         //Fill in the background colour.
-        //@TODO This method is not ideal; because it doesn't overlay the background correctly,
+        //@TODO This method is not ideal because it doesn't overlay the background correctly,
         //resulting in fringing around the waveform. PRs welcomed to fix this!
         //This function wants a hex colour without a # prefix
         $image->background(str_replace('#', '', $this->background));
@@ -79,9 +79,12 @@ class AudioWaveform extends ImageGenerator
 
     public function requirementsAreInstalled(): bool
     {
-        return class_exists('\\FFMpeg\\FFMpeg');
+        return class_exists(FFMpeg::class);
     }
 
+    /**
+     * @return Collection<int, string>
+     */
     public function supportedExtensions(): Collection
     {
         return collect(
@@ -101,6 +104,9 @@ class AudioWaveform extends ImageGenerator
         );
     }
 
+    /**
+     * @return Collection<int, string>
+     */
     public function supportedMimeTypes(): Collection
     {
         return collect(

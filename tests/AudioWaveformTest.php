@@ -70,7 +70,7 @@ class AudioWaveformTest extends TestCase
         $this->assertSame('image/png', $info['mime']);
     }
 
-    public function audioFiles(): array
+    public static function audioFiles(): array
     {
         return [
             'aiff' => [__DIR__ . '/testfiles/test_aiff.aiff'],
