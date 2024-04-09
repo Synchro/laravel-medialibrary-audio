@@ -37,15 +37,16 @@ class AudioWaveformTest extends TestCase
     /** @test */
     public function itConvertsAudioFileWithCustomColors(): void
     {
-        $generator = new AudioWaveform([
-            'foreground' => '#ffffff',
-            'background' => '#000000',
-        ]);
+        $generator = new AudioWaveform(
+            foreground: '#ffffff',
+            background: '#000000'
+        );
         $imageFilePath = $generator->convert(__DIR__ . '/testfiles/test_mp3.mp3');
 
         $this->assertStringEndsWith('.png', $imageFilePath);
 
         $info = getimagesize($imageFilePath);
+        $this->assertNotFalse($info);
         $this->assertSame(2048, $info[0]);
         $this->assertSame(2048, $info[1]);
         $this->assertSame('image/png', $info['mime']);
@@ -54,15 +55,16 @@ class AudioWaveformTest extends TestCase
     /** @test */
     public function itConvertsAudioFileWithCustomDimensions(): void
     {
-        $generator = new AudioWaveform([
-            'width' => 2048,
-            'height' => 512,
-        ]);
+        $generator = new AudioWaveform(
+            width:  2048,
+            height: 512
+        );
         $imageFilePath = $generator->convert(__DIR__ . '/testfiles/test_mp3.mp3');
 
         $this->assertStringEndsWith('.png', $imageFilePath);
 
         $info = getimagesize($imageFilePath);
+        $this->assertNotFalse($info);
         $this->assertSame(2048, $info[0]);
         $this->assertSame(512, $info[1]);
         $this->assertSame('image/png', $info['mime']);
