@@ -70,7 +70,7 @@ class AudioWaveform extends ImageGenerator
         //@TODO This method is not ideal because it doesn't overlay the background correctly,
         //resulting in fringing around the waveform. PRs welcomed to fix this!
         //This function wants a hex colour without a # prefix
-        $image->background(str_replace('#', '', $this->background));
+        $image->background(ltrim($this->background, '#'));
         $image->optimize();
         $image->save($imageFile);
 
