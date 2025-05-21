@@ -7,7 +7,6 @@
         processIsolation="false"
         stopOnFailure="false"
         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
-        displayDetailsOnPhpunitDeprecations="true"
 >
   <testsuites>
     <testsuite name="Laravel MediaLibrary Audio Test Suite">
