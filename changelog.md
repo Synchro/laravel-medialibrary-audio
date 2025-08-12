@@ -1,5 +1,9 @@
 # Laravel MediaLibrary AudioWaveform Changelog
 
+## 3.1.0 – 2025-08-12
+* Add support for transparent backgrounds, thanks to @normanyung
+* Restore missing image referenced in readme
+
 ## 3.0.0 – 2025-05-21
 * Drop support for Laravel Media Library 9
 * Add support for Laravel 12
