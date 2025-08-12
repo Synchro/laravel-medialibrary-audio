@@ -38,6 +38,8 @@ class AudioWaveform extends ImageGenerator
         }
         if (preg_match('/^#[A-Fa-f0-9]{6}$/', $background)) {
             $this->background = $background;
+        } elseif (empty($background)) {
+            $this->background = '';
         } else {
             $this->background = '#CBE2F4';
         }
@@ -70,7 +72,9 @@ class AudioWaveform extends ImageGenerator
         //@TODO This method is not ideal because it doesn't overlay the background correctly,
         //resulting in fringing around the waveform. PRs welcomed to fix this!
         //This function wants a hex colour without a # prefix
-        $image->background(ltrim($this->background, '#'));
+        if (!empty($this->background)) {
+            $image->background(ltrim($this->background, '#'));
+        }
         $image->optimize();
         $image->save($imageFile);
 
