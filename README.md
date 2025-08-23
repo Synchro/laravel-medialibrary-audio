@@ -21,7 +21,7 @@ Installing Spatie's Media Library (version 9.1.0 or later) in your Laravel proje
         'width' => 2048,
         'height' => 2048,
         'foreground' => '#113554',
-        'background' => '#CBE2F4',
+        'background' => '#CBE2F4', // or '' for transparent background
     ]
 ],
 ```
